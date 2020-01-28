@@ -8,7 +8,7 @@ namespace SecurityLab1_Starter.Controllers
 {
     public class InventoryController : Controller
     {
-        // GET: Inventory
+        [Authorize(Users = "testuser3")]
         public ActionResult Index()
         {
             return View();
@@ -23,7 +23,7 @@ namespace SecurityLab1_Starter.Controllers
             var ex = Server.GetLastError();
             Models.LogUtil lu = new Models.LogUtil();
             lu.LogToEventViewer(System.Diagnostics.EventLogEntryType.Error, "Inventory Error: " + ex.Message);
-            lu.LogToFile("Inventory Error: " + ex.Message);
+            lu.LogToFile("Inventory Error: " + ex.Message, "ErrorLog");
         }
     }
 }

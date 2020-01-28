@@ -17,13 +17,14 @@ namespace SecurityLab1_Starter
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            DependencyResolver.SetResolver(new Infrastructure.NinjectDependencyResolver());
         }
 
         protected void Application_Error() {
             Exception exception = Server.GetLastError();
             LogUtil lu = new LogUtil();
             lu.LogToEventViewer(System.Diagnostics.EventLogEntryType.Error, exception.Message);
-            lu.LogToFile(exception.Message);
+            lu.LogToFile(exception.Message, "ErrorLog");
             //redirect
             //System.Diagnostics.Debug.WriteLine(exception);
             //Response.Redirect("Home/Error");

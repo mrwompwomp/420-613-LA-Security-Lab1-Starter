@@ -9,9 +9,14 @@ namespace SecurityLab1_Starter.Models
 {
     public class LogUtil
     {
-        public void LogToFile(String text)
+        public void LogToFile(String text, string fname)
         {
-            using (var writer = new StreamWriter("C:\\a\\ErrorLog.txt"))
+            var writer = new StreamWriter("C:\\a\\useraccess.log");
+            if (fname == "ErrorLog")
+            {
+                writer = new StreamWriter("C:\\a\\ErrorLog.txt");
+            }
+            using (writer)
             {
                 writer.WriteLine(text);
             }
